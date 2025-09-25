@@ -17,8 +17,8 @@ export class LocationServiceImpl implements LocationService {
           });
         },
         (error) => {
-          // Fallback to London coordinates
-          resolve({ lat: 51.5074, lon: -0.1278 });
+          // Fallback to Hanoi, Vietnam coordinates
+          resolve({ lat: 21.0285, lon: 105.8542 });
         },
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
       );
