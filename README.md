@@ -96,12 +96,6 @@ The application follows **Clean Architecture** principles with four distinct lay
    npm run preview
    ```
 
-### API Configuration
-
-The app uses OpenWeatherMap API with the key: `85e04ce3529da7a42886b10254dfee24`
-
-The API key is configured in `src/infrastructure/api/WeatherApi.ts`. For production use, consider moving this to environment variables.
-
 ## 📂 Project Structure
 
 ```
