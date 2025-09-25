@@ -7,7 +7,7 @@ A modern, responsive Progressive Web App (PWA) built with React and TypeScript t
 ### Core Functionality
 - **Current Weather Display**: Real-time weather information with detailed metrics
 - **Weather Forecast**: 1, 3, and 7-day forecast options with comprehensive data
-- **Geolocation Support**: Automatic location detection with fallback to London
+- **Geolocation Support**: Automatic location detection with fallback to Hanoi, Vietnam
 - **Progressive Web App**: Offline capabilities with service worker integration
 - **Responsive Design**: Mobile-first approach with touch-friendly navigation
 
