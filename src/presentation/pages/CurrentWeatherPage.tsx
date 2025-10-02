@@ -3,10 +3,11 @@ import { useWeather } from '../hooks/useWeather';
 import { WeatherIcon } from '../components/WeatherIcon';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
+import { LocationStatus } from '../components/LocationStatus';
 import { Thermometer, Droplets, Eye, Wind } from 'lucide-react';
 
 export const CurrentWeatherPage: React.FC = () => {
-  const { weather, loading, error } = useWeather();
+  const { weather, loading, error, locationStatus } = useWeather();
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
@@ -26,7 +27,10 @@ export const CurrentWeatherPage: React.FC = () => {
         {/* Header */}
         <div className="text-center text-white mb-8">
           <h1 className="text-2xl font-bold mb-2">Current Weather</h1>
-          <p className="text-lg opacity-90">{weather.location}</p>
+          <div className="space-y-2">
+            <p className="text-lg opacity-90">{weather.location}</p>
+            <LocationStatus status={locationStatus} location={weather.location} />
+          </div>
         </div>
 
         {/* Main Weather Card */}

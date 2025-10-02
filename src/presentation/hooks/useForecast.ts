@@ -9,10 +9,12 @@ export const useForecast = (days: number) => {
   const [forecast, setForecast] = useState<WeatherForecast[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [locationStatus, setLocationStatus] = useState<'requesting' | 'granted' | 'denied' | 'unavailable'>('requesting');
 
   useEffect(() => {
     const fetchForecast = async () => {
       try {
+        setLocationStatus('requesting');
         const weatherRepository = new WeatherRepositoryImpl();
         const locationService = new LocationServiceImpl();
         const weatherService = new WeatherService(weatherRepository, locationService);
@@ -20,8 +22,10 @@ export const useForecast = (days: number) => {
         
         const forecastData = await getForecastUseCase.execute(days);
         setForecast(forecastData);
+        setLocationStatus('granted');
         setError(null);
       } catch (err) {
+        setLocationStatus('denied');
         setError(err instanceof Error ? err.message : 'Failed to fetch forecast');
       } finally {
         setLoading(false);
@@ -31,5 +35,5 @@ export const useForecast = (days: number) => {
     fetchForecast();
   }, [days]);
 
-  return { forecast, loading, error };
+  return { forecast, loading, error, locationStatus };
 };
