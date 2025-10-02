@@ -3,12 +3,11 @@ import { useForecast } from '../hooks/useForecast';
 import { WeatherIcon } from '../components/WeatherIcon';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ErrorMessage } from '../components/ErrorMessage';
-import { LocationStatus } from '../components/LocationStatus';
 import { format } from 'date-fns';
 
 export const ForecastPage: React.FC = () => {
   const [selectedDays, setSelectedDays] = useState<1 | 3 | 7>(3);
-  const { forecast, location, loading, error, locationStatus } = useForecast(selectedDays);
+  const { forecast, loading, error } = useForecast(selectedDays);
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
@@ -19,18 +18,6 @@ export const ForecastPage: React.FC = () => {
         {/* Header */}
         <div className="text-center text-white mb-6">
           <h1 className="text-2xl font-bold mb-4">Weather Forecast</h1>
-          
-          {/* Location Info */}
-          <div className="mb-4">
-            <p className="text-lg opacity-90">
-              {location?.name ? `${location.name}${location.country ? `, ${location.country}` : ''}` : 'Loading location...'}
-            </p>
-            <LocationStatus 
-              status={locationStatus} 
-              locationName={location?.name ? `${location.name}${location.country ? `, ${location.country}` : ''}` : 'Unknown location'}
-              isUserLocation={locationStatus === 'granted'}
-            />
-          </div>
           
           {/* Day Selector */}
           <div className="flex bg-white/20 backdrop-blur-md rounded-full p-1 border border-white/30">

@@ -1,8 +1,7 @@
-import { CurrentWeather, ForecastResponse, Location, GeocodingResponse } from '../../shared/types/weather.types';
+import { CurrentWeather, ForecastResponse, Location } from '../../shared/types/weather.types';
 
 const API_KEY = '85e04ce3529da7a42886b10254dfee24';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
-const GEO_BASE_URL = 'https://api.openweathermap.org/geo/1.0';
 
 export class WeatherApi {
   async getCurrentWeather(location: Location): Promise<CurrentWeather> {
@@ -24,18 +23,6 @@ export class WeatherApi {
     
     if (!response.ok) {
       throw new Error('Failed to fetch weather forecast');
-    }
-    
-    return response.json();
-  }
-
-  async reverseGeocode(location: Location): Promise<GeocodingResponse[]> {
-    const response = await fetch(
-      `${GEO_BASE_URL}/reverse?lat=${location.lat}&lon=${location.lon}&limit=1&appid=${API_KEY}`
-    );
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch location name');
     }
     
     return response.json();
