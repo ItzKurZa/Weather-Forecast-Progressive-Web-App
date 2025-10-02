@@ -47,6 +47,7 @@ The application follows **Clean Architecture** principles with four distinct lay
 
 - **Frontend Framework**: React 18 with TypeScript
 - **Build Tool**: Vite
+- **Mobile Framework**: Capacitor for native iOS/Android apps
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
 - **Date Handling**: date-fns
@@ -58,6 +59,8 @@ The application follows **Clean Architecture** principles with four distinct lay
 
 - **Offline Support**: Service worker caches essential resources
 - **App Manifest**: Installable on mobile devices and desktop
+- **Native Mobile Apps**: iOS and Android apps via Capacitor
+- **Native Geolocation**: Uses device GPS on mobile platforms
 - **Responsive Design**: Works seamlessly across all device sizes
 - **Fast Loading**: Optimized bundle with code splitting
 - **Native-like Experience**: Standalone display mode
@@ -94,6 +97,31 @@ The application follows **Clean Architecture** principles with four distinct lay
 5. **Preview production build**
    ```bash
    npm run preview
+   ```
+
+### Mobile Development
+
+1. **Add mobile platforms**
+   ```bash
+   # Add Android platform
+   npm run cap:add android
+   
+   # Add iOS platform (macOS only)
+   npm run cap:add ios
+   ```
+
+2. **Build and run on mobile**
+   ```bash
+   # Build and open Android Studio
+   npm run android
+   
+   # Build and open Xcode (macOS only)
+   npm run ios
+   ```
+
+3. **Sync changes to mobile**
+   ```bash
+   npm run cap:sync
    ```
 
 ## 📂 Project Structure
@@ -150,6 +178,8 @@ src/
 - Firefox
 - Safari
 - Edge
+- **Mobile**: iOS Safari, Android Chrome
+- **Native Apps**: iOS 14+, Android API 23+
 
 ## 📊 Performance Features
 
@@ -162,18 +192,34 @@ src/
 ## 🔒 Privacy & Security
 
 - **Location Permission**: Requests user permission for geolocation
-- **Fallback Location**: Uses London coordinates if location access denied
+- **Fallback Location**: Uses Hanoi, Vietnam coordinates if location access denied
+- **Native Permissions**: Proper permission handling on mobile platforms
 - **HTTPS Ready**: Designed for secure deployment
 - **No Data Storage**: No personal data stored locally
 
 ## 🚀 Deployment
 
-The application is ready for deployment to any static hosting service:
+### Web Deployment
+The web application is ready for deployment to any static hosting service:
 
 - **Netlify**: Drag and drop the `dist` folder
 - **Vercel**: Connect your repository for automatic deployments
 - **GitHub Pages**: Use the built files from the `dist` directory
 - **Firebase Hosting**: Deploy using Firebase CLI
+
+### Mobile App Deployment
+
+#### Android
+1. Build the project: `npm run build`
+2. Sync with Capacitor: `npm run cap:sync`
+3. Open Android Studio: `npm run cap:open android`
+4. Build APK or AAB for Google Play Store
+
+#### iOS
+1. Build the project: `npm run build`
+2. Sync with Capacitor: `npm run cap:sync`
+3. Open Xcode: `npm run cap:open ios`
+4. Build for App Store or TestFlight
 
 ## 🤝 Contributing
 
@@ -190,10 +236,11 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 🙏 Acknowledgments
 
 - **OpenWeatherMap** for providing the weather API
+- **Capacitor** for enabling native mobile app development
 - **Lucide** for the beautiful icon set
 - **Tailwind CSS** for the utility-first CSS framework
 - **React Team** for the excellent framework
 
 ---
 
-Built using React, TypeScript, and Clean Architecture principles.
+Built using React, TypeScript, Capacitor, and Clean Architecture principles.
