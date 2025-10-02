@@ -84,4 +84,15 @@ export interface ForecastResponse {
 export interface Location {
   lat: number;
   lon: number;
+  name?: string;
+  country?: string;
+}
+
+export interface GeocodingResponse {
+  name: string;
+  local_names?: { [key: string]: string };
+  lat: number;
+  lon: number;
+  country: string;
+  state?: string;
 }

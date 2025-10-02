@@ -7,7 +7,7 @@ import { LocationStatus } from '../components/LocationStatus';
 import { Thermometer, Droplets, Eye, Wind } from 'lucide-react';
 
 export const CurrentWeatherPage: React.FC = () => {
-  const { weather, loading, error, locationStatus } = useWeather();
+  const { weather, location, loading, error, locationStatus } = useWeather();
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
@@ -28,8 +28,14 @@ export const CurrentWeatherPage: React.FC = () => {
         <div className="text-center text-white mb-8">
           <h1 className="text-2xl font-bold mb-2">Current Weather</h1>
           <div className="space-y-2">
-            <p className="text-lg opacity-90">{weather.location}</p>
-            <LocationStatus status={locationStatus} location={weather.location} />
+            <p className="text-lg opacity-90">
+              {location?.name ? `${location.name}${location.country ? `, ${location.country}` : ''}` : weather.location}
+            </p>
+            <LocationStatus 
+              status={locationStatus} 
+              locationName={location?.name ? `${location.name}${location.country ? `, ${location.country}` : ''}` : weather.location}
+              isUserLocation={locationStatus === 'granted'}
+            />
           </div>
         </div>
 

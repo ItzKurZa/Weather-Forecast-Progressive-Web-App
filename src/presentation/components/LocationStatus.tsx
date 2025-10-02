@@ -4,10 +4,15 @@ import { Capacitor } from '@capacitor/core';
 
 interface LocationStatusProps {
   status: 'requesting' | 'granted' | 'denied' | 'unavailable';
-  location?: string;
+  locationName?: string;
+  isUserLocation?: boolean;
 }
 
-export const LocationStatus: React.FC<LocationStatusProps> = ({ status, location }) => {
+export const LocationStatus: React.FC<LocationStatusProps> = ({ 
+  status, 
+  locationName, 
+  isUserLocation = false 
+}) => {
   const getStatusInfo = () => {
     switch (status) {
       case 'requesting':
@@ -19,25 +24,27 @@ export const LocationStatus: React.FC<LocationStatusProps> = ({ status, location
       case 'granted':
         return {
           icon: <CheckCircle size={16} />,
-          text: `${Capacitor.isNativePlatform() ? 'Device' : 'Current'} location: ${location}`,
+          text: isUserLocation 
+            ? `${Capacitor.isNativePlatform() ? 'Device' : 'Current'} location: ${locationName}`
+            : `Location: ${locationName}`,
           color: 'text-green-400'
         };
       case 'denied':
         return {
           icon: <AlertCircle size={16} />,
-          text: `Using default location: ${location}`,
+          text: `Using default location: ${locationName}`,
           color: 'text-yellow-400'
         };
       case 'unavailable':
         return {
           icon: <AlertCircle size={16} />,
-          text: `Location unavailable, using: ${location}`,
+          text: `Location unavailable, using: ${locationName}`,
           color: 'text-red-400'
         };
       default:
         return {
           icon: <MapPin size={16} />,
-          text: location || 'Unknown location',
+          text: locationName || 'Unknown location',
           color: 'text-gray-400'
         };
     }

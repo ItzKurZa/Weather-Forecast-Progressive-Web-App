@@ -7,6 +7,7 @@ import { GetCurrentWeatherUseCase } from '../../application/usecases/GetCurrentW
 
 export const useWeather = () => {
   const [weather, setWeather] = useState<Weather | null>(null);
+  const [location, setLocation] = useState<Location | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [locationStatus, setLocationStatus] = useState<'requesting' | 'granted' | 'denied' | 'unavailable'>('requesting');
@@ -21,8 +22,11 @@ export const useWeather = () => {
         const getCurrentWeatherUseCase = new GetCurrentWeatherUseCase(weatherService);
         
         const currentWeather = await getCurrentWeatherUseCase.execute();
+        const currentLocation = await locationService.getCurrentLocation();
+        
         setWeather(currentWeather);
-        setLocationStatus('granted');
+        setLocation(currentLocation);
+        setLocationStatus(currentLocation.name ? 'granted' : 'denied');
         setError(null);
       } catch (err) {
         setLocationStatus('denied');
@@ -35,5 +39,5 @@ export const useWeather = () => {
     fetchWeather();
   }, []);
 
-  return { weather, loading, error, locationStatus };
+  return { weather, location, loading, error, locationStatus };
 };
