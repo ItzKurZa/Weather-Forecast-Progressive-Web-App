@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, AlertCircle, CheckCircle } from 'lucide-react';
+import { Capacitor } from '@capacitor/core';
 
 interface LocationStatusProps {
   status: 'requesting' | 'granted' | 'denied' | 'unavailable';
@@ -18,7 +19,7 @@ export const LocationStatus: React.FC<LocationStatusProps> = ({ status, location
       case 'granted':
         return {
           icon: <CheckCircle size={16} />,
-          text: `Current location: ${location}`,
+          text: `${Capacitor.isNativePlatform() ? 'Device' : 'Current'} location: ${location}`,
           color: 'text-green-400'
         };
       case 'denied':
@@ -30,7 +31,7 @@ export const LocationStatus: React.FC<LocationStatusProps> = ({ status, location
       case 'unavailable':
         return {
           icon: <AlertCircle size={16} />,
-          text: `Location unavailable: ${location}`,
+          text: `Location unavailable, using: ${location}`,
           color: 'text-red-400'
         };
       default:

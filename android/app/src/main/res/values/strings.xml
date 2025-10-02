@@ -4,4 +4,5 @@
     <string name="title_activity_main">WeatherCast</string>
     <string name="package_name">com.example.app</string>
     <string name="custom_url_scheme">com.example.app</string>
+    <string name="location_permission_rationale">This app needs access to your location to provide accurate weather information for your area.</string>
 </resources>
